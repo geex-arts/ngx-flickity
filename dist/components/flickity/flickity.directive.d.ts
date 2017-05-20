@@ -5,7 +5,10 @@ export declare class FlickityDirective implements AfterContentInit, OnDestroy {
     config: FlickityOptions;
     slideSelect: EventEmitter<number>;
     cellStaticClick: EventEmitter<number>;
+    childrenUpdated: EventEmitter<void>;
     private flkty;
+    private appendElements;
+    private childrenUpdateInterval;
     constructor(el: ElementRef);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
@@ -22,4 +25,5 @@ export declare class FlickityDirective implements AfterContentInit, OnDestroy {
     readonly slides: number | undefined;
     append(el: HTMLElement): void;
     prepend(el: HTMLElement): void;
+    private updateElements();
 }
