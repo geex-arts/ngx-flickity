@@ -1,0 +1,30 @@
+export interface FlickityOptions {
+    cellSelector?: string,
+    initialIndex?: number,
+    accessibility?: boolean,
+    setGallerySize?: boolean,
+    resize?: boolean,
+    cellAlign?: string,
+    contain?: boolean,
+    imagesLoaded?: boolean,
+    percentPosition?: boolean,
+    rightToLeft?: boolean,
+    draggable?: boolean
+    freeScroll?: boolean,
+    wrapAround?: boolean,
+    groupCells?: boolean | number | string,
+    lazyLoad?: boolean | number,
+    bgLazyLoad?: boolean | number,
+    autoPlay?: boolean | number,
+    pauseAutoPlayOnHover?: boolean,
+    adaptiveHeight?: boolean,
+    watchCSS?: boolean,
+    asNavFor?: string | HTMLElement,
+    dragThreshold?: number,
+    selectedAttraction?: number,
+    friction?: number,
+    freeScrollFriction?: number,
+    prevNextButtons?: boolean,
+    pageDots?: boolean
+    arrowShape?: string
+}
