@@ -1,7 +1,11 @@
+declare let require: any;
+
 import {
   ElementRef, Directive, OnDestroy, Input, Output, EventEmitter, AfterContentInit
 } from '@angular/core';
-import * as Flickity from 'flickity';
+
+// import * as Flickity from 'flickity';
+const Flickity = require('flickity');
 
 import { FlickityOptions } from "../../interfaces/flickity-options.interface";
 
@@ -120,7 +124,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
       return;
     }
 
-    return this.flkty.slides.length;
+    return this.flkty['slides'].length;
   }
 
   append(el: HTMLElement) {

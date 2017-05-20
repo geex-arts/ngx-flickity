@@ -1,16 +1,30 @@
 {
     "compilerOptions": {
-        "noImplicitAny": true,
-        "module": "commonjs",
-        "target": "es5",
+        "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "inlineSources": true,
+        "lib": [
+            "dom",
+            "es2015"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "../dist",
         "sourceMap": true,
-        "declaration": true,
-        "strictNullChecks": true,
-        "skipLibCheck": true
+        "target": "es5",
+        "typeRoots": [
+            "../node_modules/@types"
+        ],
+        "types": [
+            "flickity"
+        ]
     },
-    "exclude": [
-        "node_modules"
-    ]
+    "angularCompilerOptions": {
+        "skipMetadataEmit": false,
+        "skipTemplateCodegen": true
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useWebpackText": true
+    }
 }
