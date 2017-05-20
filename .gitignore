@@ -9,9 +9,3 @@ npm-debug.log*
 # OS generated files
 Thumbs.db
 .DS_Store
-
-# Ignored files
-*.js
-!config.js
-*.map
-*.d.ts
