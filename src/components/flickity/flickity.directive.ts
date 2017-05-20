@@ -15,10 +15,15 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   @Input('flickity') config: FlickityOptions = {};
   @Output() slideSelect = new EventEmitter<number>();
   @Output() cellStaticClick = new EventEmitter<number>();
+  @Output() childrenUpdated = new EventEmitter<void>();
 
   private flkty: Flickity;
+  private appendElements: HTMLElement[] = [];
+  private childrenUpdateInterval = 300;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) {
+    setInterval(() => this.updateElements(), this.childrenUpdateInterval);
+  }
 
   ngAfterContentInit(): void {
     this.init();
@@ -128,11 +133,22 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   }
 
   append(el: HTMLElement) {
-    this.flkty.append(el);
-    this.resize();
+    this.appendElements.push(el);
   }
 
   prepend(el: HTMLElement) {
     this.flkty.prepend(el);
+  }
+
+  private updateElements() {
+    if (!this.flkty || this.appendElements.length == 0) {
+      return;
+    }
+
+    this.appendElements.forEach(el => this.flkty.append(el));
+    this.appendElements = [];
+
+    this.resize();
+    this.childrenUpdated.emit();
   }
 }

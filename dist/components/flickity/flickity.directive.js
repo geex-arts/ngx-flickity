@@ -5,10 +5,15 @@ var core_1 = require("@angular/core");
 var Flickity = require('flickity');
 var FlickityDirective = (function () {
     function FlickityDirective(el) {
+        var _this = this;
         this.el = el;
         this.config = {};
         this.slideSelect = new core_1.EventEmitter();
         this.cellStaticClick = new core_1.EventEmitter();
+        this.childrenUpdated = new core_1.EventEmitter();
+        this.appendElements = [];
+        this.childrenUpdateInterval = 300;
+        setInterval(function () { return _this.updateElements(); }, this.childrenUpdateInterval);
     }
     FlickityDirective.prototype.ngAfterContentInit = function () {
         this.init();
@@ -104,11 +109,20 @@ var FlickityDirective = (function () {
         configurable: true
     });
     FlickityDirective.prototype.append = function (el) {
-        this.flkty.append(el);
-        this.resize();
+        this.appendElements.push(el);
     };
     FlickityDirective.prototype.prepend = function (el) {
         this.flkty.prepend(el);
+    };
+    FlickityDirective.prototype.updateElements = function () {
+        var _this = this;
+        if (!this.flkty || this.appendElements.length == 0) {
+            return;
+        }
+        this.appendElements.forEach(function (el) { return _this.flkty.append(el); });
+        this.appendElements = [];
+        this.resize();
+        this.childrenUpdated.emit();
     };
     return FlickityDirective;
 }());
@@ -123,6 +137,7 @@ FlickityDirective.propDecorators = {
     'config': [{ type: core_1.Input, args: ['flickity',] },],
     'slideSelect': [{ type: core_1.Output },],
     'cellStaticClick': [{ type: core_1.Output },],
+    'childrenUpdated': [{ type: core_1.Output },],
 };
 exports.FlickityDirective = FlickityDirective;
 //# sourceMappingURL=flickity.directive.js.map
