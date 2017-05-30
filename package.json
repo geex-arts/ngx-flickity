@@ -4,7 +4,7 @@
   "description": "Angular2 component for https://flickity.metafizzy.co/",
   "main": "dist/index.js",
   "dependencies": {
-    "flickity": "^2.0.6"
+    "flickity": "^2.0.7"
   },
   "devDependencies": {
     "@angular/compiler": "^4.0.0",
