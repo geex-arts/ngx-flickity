@@ -61,7 +61,7 @@ var FlickityDirective = (function () {
         this.flkty.previous();
     };
     FlickityDirective.prototype.previousAvailable = function () {
-        if (!this.selectedIndex) {
+        if (this.selectedIndex === undefined) {
             return false;
         }
         return this.selectedIndex > 0;
@@ -73,7 +73,7 @@ var FlickityDirective = (function () {
         this.flkty.next();
     };
     FlickityDirective.prototype.nextAvailable = function () {
-        if (!this.selectedIndex || !this.slides) {
+        if (this.selectedIndex === undefined || !this.slides) {
             return false;
         }
         return this.selectedIndex < this.slides - 1;

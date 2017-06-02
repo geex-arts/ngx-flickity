@@ -85,7 +85,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   }
 
   previousAvailable(): boolean {
-    if (!this.selectedIndex) {
+    if (this.selectedIndex === undefined) {
       return false;
     }
 
@@ -101,14 +101,14 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   }
 
   nextAvailable(): boolean {
-    if (!this.selectedIndex || !this.slides) {
+    if (this.selectedIndex === undefined || !this.slides) {
       return false;
     }
 
     return this.selectedIndex < this.slides - 1;
   }
 
-  get selectedIndex(): number | undefined {
+  get selectedIndex(): number {
     if (!this.flkty) {
       return;
     }
@@ -116,7 +116,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
     return this.flkty.selectedIndex;
   }
 
-  get cells(): number | undefined {
+  get cells(): number {
     if (!this.flkty) {
       return;
     }
@@ -124,7 +124,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
     return this.flkty.cells.length;
   }
 
-  get slides(): number | undefined {
+  get slides(): number {
     if (!this.flkty) {
       return;
     }
