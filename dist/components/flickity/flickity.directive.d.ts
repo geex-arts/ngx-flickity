@@ -20,9 +20,9 @@ export declare class FlickityDirective implements AfterContentInit, OnDestroy {
     previousAvailable(): boolean;
     next(): void;
     nextAvailable(): boolean;
-    readonly selectedIndex: number | undefined;
-    readonly cells: number | undefined;
-    readonly slides: number | undefined;
+    readonly selectedIndex: number;
+    readonly cells: number;
+    readonly slides: number;
     append(el: HTMLElement): void;
     prepend(el: HTMLElement): void;
     private updateElements();
