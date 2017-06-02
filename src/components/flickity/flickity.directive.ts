@@ -108,7 +108,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
     return this.selectedIndex < this.slides - 1;
   }
 
-  get selectedIndex(): number | undefined {
+  get selectedIndex(): number {
     if (!this.flkty) {
       return;
     }
@@ -116,7 +116,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
     return this.flkty.selectedIndex;
   }
 
-  get cells(): number | undefined {
+  get cells(): number {
     if (!this.flkty) {
       return;
     }
@@ -124,7 +124,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
     return this.flkty.cells.length;
   }
 
-  get slides(): number | undefined {
+  get slides(): number {
     if (!this.flkty) {
       return;
     }
