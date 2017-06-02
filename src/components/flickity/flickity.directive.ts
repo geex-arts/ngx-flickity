@@ -85,7 +85,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   }
 
   previousAvailable(): boolean {
-    if (!this.selectedIndex) {
+    if (this.selectedIndex === undefined) {
       return false;
     }
 
@@ -101,7 +101,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   }
 
   nextAvailable(): boolean {
-    if (!this.selectedIndex || !this.slides) {
+    if (this.selectedIndex === undefined || !this.slides) {
       return false;
     }
 
