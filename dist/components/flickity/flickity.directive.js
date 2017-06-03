@@ -4,7 +4,6 @@ var core_1 = require("@angular/core");
 var app_config_service_1 = require("../../services/app-config.service");
 var FlickityDirective = (function () {
     function FlickityDirective(el, appConfigService) {
-        var _this = this;
         this.el = el;
         this.appConfigService = appConfigService;
         this.config = {};
@@ -13,7 +12,6 @@ var FlickityDirective = (function () {
         this.childrenUpdated = new core_1.EventEmitter();
         this.appendElements = [];
         this.childrenUpdateInterval = 300;
-        setInterval(function () { return _this.updateElements(); }, this.childrenUpdateInterval);
     }
     FlickityDirective.prototype.ngAfterContentInit = function () {
         this.init();
@@ -30,7 +28,7 @@ var FlickityDirective = (function () {
         var config = this.config;
         if (this.flkty) {
             config['initialIndex'] = this.flkty.selectedIndex;
-            this.flkty.destroy();
+            this.destroy();
         }
         this.flkty = new Flickity(this.el.nativeElement, config);
         this.flkty.on('select', function () {
@@ -39,10 +37,15 @@ var FlickityDirective = (function () {
         this.flkty.on('staticClick', function (_event, _pointer, _cellElement, cellIndex) {
             _this.cellStaticClick.emit(cellIndex);
         });
+        this.childrenUpdate = setInterval(function () { return _this.updateElements(); }, this.childrenUpdateInterval);
     };
     FlickityDirective.prototype.destroy = function () {
         if (!this.flkty) {
             return;
+        }
+        if (this.childrenUpdate) {
+            clearInterval(this.childrenUpdate);
+            this.childrenUpdate = undefined;
         }
         this.flkty.destroy();
     };
