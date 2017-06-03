@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-// import * as Flickity from 'flickity';
-var Flickity = require('flickity');
+var app_config_service_1 = require("../../services/app-config.service");
 var FlickityDirective = (function () {
-    function FlickityDirective(el) {
+    function FlickityDirective(el, appConfigService) {
         var _this = this;
         this.el = el;
+        this.appConfigService = appConfigService;
         this.config = {};
         this.slideSelect = new core_1.EventEmitter();
         this.cellStaticClick = new core_1.EventEmitter();
@@ -23,6 +23,10 @@ var FlickityDirective = (function () {
     };
     FlickityDirective.prototype.init = function () {
         var _this = this;
+        if (this.appConfigService.isPlatformServer()) {
+            return;
+        }
+        var Flickity = require('flickity');
         var config = this.config;
         if (this.flkty) {
             config['initialIndex'] = this.flkty.selectedIndex;
@@ -132,6 +136,7 @@ FlickityDirective.decorators = [
 /** @nocollapse */
 FlickityDirective.ctorParameters = function () { return [
     { type: core_1.ElementRef, },
+    { type: app_config_service_1.AppConfigService, },
 ]; };
 FlickityDirective.propDecorators = {
     'config': [{ type: core_1.Input, args: ['flickity',] },],
