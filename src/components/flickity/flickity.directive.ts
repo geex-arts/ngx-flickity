@@ -4,10 +4,8 @@ import {
   ElementRef, Directive, OnDestroy, Input, Output, EventEmitter, AfterContentInit
 } from '@angular/core';
 
-// import * as Flickity from 'flickity';
-const Flickity = require('flickity');
-
 import { FlickityOptions } from "../../interfaces/flickity-options.interface";
+import { AppConfigService } from '../../services/app-config.service';
 
 @Directive({ selector: '[flickity]' })
 export class FlickityDirective implements AfterContentInit, OnDestroy {
@@ -17,11 +15,12 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   @Output() cellStaticClick = new EventEmitter<number>();
   @Output() childrenUpdated = new EventEmitter<void>();
 
-  private flkty: Flickity;
+  private flkty: any;
   private appendElements: HTMLElement[] = [];
   private childrenUpdateInterval = 300;
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef,
+              private appConfigService: AppConfigService) {
     setInterval(() => this.updateElements(), this.childrenUpdateInterval);
   }
 
@@ -34,6 +33,12 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
   }
 
   init() {
+    if (this.appConfigService.isPlatformServer()) {
+      return;
+    }
+
+    const Flickity = require('flickity');
+
     let config = this.config;
 
     if (this.flkty) {
