@@ -17,12 +17,11 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
 
   private flkty: any;
   private appendElements: HTMLElement[] = [];
+  private childrenUpdate;
   private childrenUpdateInterval = 300;
 
   constructor(private el: ElementRef,
-              private appConfigService: AppConfigService) {
-    setInterval(() => this.updateElements(), this.childrenUpdateInterval);
-  }
+              private appConfigService: AppConfigService) {}
 
   ngAfterContentInit(): void {
     this.init();
@@ -43,7 +42,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
 
     if (this.flkty) {
       config['initialIndex'] = this.flkty.selectedIndex;
-      this.flkty.destroy();
+      this.destroy();
     }
 
     this.flkty = new Flickity(this.el.nativeElement, config);
@@ -55,11 +54,18 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
     this.flkty.on('staticClick', (_event: any, _pointer: any, _cellElement: any, cellIndex: any) => {
       this.cellStaticClick.emit(cellIndex);
     });
+
+    this.childrenUpdate = setInterval(() => this.updateElements(), this.childrenUpdateInterval);
   }
 
   destroy() {
     if (!this.flkty) {
       return;
+    }
+
+    if (this.childrenUpdate) {
+      clearInterval(this.childrenUpdate);
+      this.childrenUpdate = undefined;
     }
 
     this.flkty.destroy();
