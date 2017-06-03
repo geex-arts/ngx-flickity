@@ -10,6 +10,7 @@ export declare class FlickityDirective implements AfterContentInit, OnDestroy {
     childrenUpdated: EventEmitter<void>;
     private flkty;
     private appendElements;
+    private childrenUpdate;
     private childrenUpdateInterval;
     constructor(el: ElementRef, appConfigService: AppConfigService);
     ngAfterContentInit(): void;
