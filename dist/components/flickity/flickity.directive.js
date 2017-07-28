@@ -131,6 +131,11 @@ var FlickityDirective = (function () {
         this.resize();
         this.childrenUpdated.emit();
     };
+    FlickityDirective.prototype.select = function (index, isWrapped, isInstant) {
+        if (isWrapped === void 0) { isWrapped = true; }
+        if (isInstant === void 0) { isInstant = false; }
+        this.flkty.select(index, isWrapped, isInstant);
+    };
     return FlickityDirective;
 }());
 FlickityDirective.decorators = [

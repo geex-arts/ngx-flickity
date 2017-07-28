@@ -29,4 +29,5 @@ export declare class FlickityDirective implements AfterContentInit, OnDestroy {
     append(el: HTMLElement): void;
     prepend(el: HTMLElement): void;
     private updateElements();
+    select(index: number, isWrapped?: boolean, isInstant?: boolean): void;
 }
