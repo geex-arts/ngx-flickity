@@ -162,4 +162,8 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
     this.resize();
     this.childrenUpdated.emit();
   }
+
+  select(index: number, isWrapped = true, isInstant = false) {
+    this.flkty.select(index, isWrapped, isInstant);
+  }
 }
