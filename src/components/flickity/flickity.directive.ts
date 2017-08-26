@@ -55,7 +55,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
       this.cellStaticClick.emit(cellIndex);
     });
 
-    this.childrenUpdate = setInterval(() => this.updateElements(), this.childrenUpdateInterval);
+    this.updateElements();
   }
 
   destroy() {
@@ -161,6 +161,7 @@ export class FlickityDirective implements AfterContentInit, OnDestroy {
 
     this.resize();
     this.childrenUpdated.emit();
+    this.childrenUpdate = setTimeout(() => this.updateElements(), this.childrenUpdateInterval);
   }
 
   select(index: number, isWrapped = true, isInstant = false) {
