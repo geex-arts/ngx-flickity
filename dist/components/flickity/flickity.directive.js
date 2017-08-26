@@ -37,7 +37,7 @@ var FlickityDirective = (function () {
         this.flkty.on('staticClick', function (_event, _pointer, _cellElement, cellIndex) {
             _this.cellStaticClick.emit(cellIndex);
         });
-        this.childrenUpdate = setInterval(function () { return _this.updateElements(); }, this.childrenUpdateInterval);
+        this.updateElements();
     };
     FlickityDirective.prototype.destroy = function () {
         if (!this.flkty) {
@@ -130,6 +130,7 @@ var FlickityDirective = (function () {
         this.appendElements = [];
         this.resize();
         this.childrenUpdated.emit();
+        this.childrenUpdate = setTimeout(function () { return _this.updateElements(); }, this.childrenUpdateInterval);
     };
     FlickityDirective.prototype.select = function (index, isWrapped, isInstant) {
         if (isWrapped === void 0) { isWrapped = true; }
