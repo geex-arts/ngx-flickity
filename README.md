@@ -26,7 +26,7 @@ import { FlickityModule } from 'ngx-flickity';
    selector: 'my-component',
    template: `
      <div [flickity]>
-       <div [flickity-child] *ngFor="let child of children">{{child.title}}</div>
+       <div [flickityChild] *ngFor="let child of children">{{child.title}}</div>
      </div>
      `
  })
